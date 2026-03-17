@@ -412,14 +412,13 @@
       </div>
     </div>
  
-    <div class="question">
+    <div class="question hidden-section" id="pregunta6">
       <div class="q-label"><span class="q-num">6</span>Cuando tus esquís no eran adecuados para las condiciones, ¿qué hiciste?</div>
       <div class="options">
         <label class="opt"><input type="radio" name="solucion_condiciones" value="alquile"><span>Alquilé otros esquís en la estación</span></label>
         <label class="opt"><input type="radio" name="solucion_condiciones" value="segui"><span>Seguí esquiando con los mismos</span></label>
         <label class="opt"><input type="radio" name="solucion_condiciones" value="cambie_pista"><span>Cambié de pista para adaptarme</span></label>
         <label class="opt"><input type="radio" name="solucion_condiciones" value="deje"><span>Dejé de esquiar ese día</span></label>
-        <label class="opt"><input type="radio" name="solucion_condiciones" value="no_aplica"><span>No me ha pasado nunca</span></label>
       </div>
     </div>
  
@@ -435,10 +434,10 @@
     <div class="question">
       <div class="q-label"><span class="q-num">8</span>¿Cómo resuelves el transporte de tus esquís habitualmente?</div>
       <div class="options">
-        <label class="opt"><input type="radio" name="como_transporte" value="coche"><span>En el coche sin problema</span></label>
+        <label class="opt"><input type="radio" name="como_transporte" value="coche_taquillas"><span>En el coche </span></label>
         <label class="opt"><input type="radio" name="como_transporte" value="portaesquis"><span>Con portaesquís en el coche</span></label>
-        <label class="opt"><input type="radio" name="como_transporte" value="transporte_publico"><span>En transporte público, es complicado</span></label>
-        <label class="opt"><input type="radio" name="como_transporte" value="taquillas"><span>Los dejo en la estación / taquillas</span></label>
+        <label class="opt"><input type="radio" name="como_transporte" value="transporte_publico"><span>En autobus/ coche comparido</span></label>
+        <label class="opt"><input type="radio" name="como_transporte" value="transporte_publico"><span>Los alquilo en la estación y subo andando</span></label>
       </div>
     </div>
  
@@ -483,6 +482,19 @@
   const secProblema = document.getElementById('secProblema');
   const submitArea = document.getElementById('submitArea');
   const noSkiAlert = document.getElementById('noSkiAlert');
+ 
+  document.querySelectorAll('input[name="limitado_condiciones"]').forEach(input => {
+    input.addEventListener('change', function() {
+      const preg6 = document.getElementById('pregunta6');
+      if (this.value === 'varias_veces' || this.value === 'alguna_vez') {
+        preg6.classList.remove('hidden-section');
+      } else {
+        preg6.classList.add('hidden-section');
+        preg6.querySelectorAll('input').forEach(i => i.checked = false);
+      }
+      updateProgress();
+    });
+  });
  
   document.querySelectorAll('input[name="esquia"]').forEach(input => {
     input.addEventListener('change', function() {
