@@ -2,163 +2,493 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Encuesta Supermercados</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encuesta Esquís Modulares</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --snow: #f4f7fb;
+      --ice: #dce8f5;
+      --mountain: #1a2a3a;
+      --slope: #2c4a6e;
+      --accent: #4a9ede;
+      --accent2: #e8f4ff;
+      --text: #1a2a3a;
+      --muted: #6b7f95;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f0f4f8;
-      margin: 0;
-      padding: 20px;
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--snow);
+      background-image:
+        radial-gradient(ellipse at 20% 0%, rgba(74,158,222,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(44,74,110,0.08) 0%, transparent 50%);
+      min-height: 100vh;
+      color: var(--text);
+      padding: 0 0 60px;
     }
-    h1 {
+
+    header {
+      background: linear-gradient(135deg, var(--mountain) 0%, var(--slope) 100%);
+      padding: 50px 20px 40px;
       text-align: center;
-      color: #333;
+      position: relative;
+      overflow: hidden;
     }
+
+    header::before {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 40px;
+      background: var(--snow);
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+
+    header::after {
+      content: '⛷';
+      position: absolute;
+      right: 8%;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 80px;
+      opacity: 0.08;
+    }
+
+    .header-tag {
+      display: inline-block;
+      background: rgba(74,158,222,0.25);
+      color: var(--accent);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(74,158,222,0.3);
+    }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 7vw, 64px);
+      color: white;
+      letter-spacing: 2px;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      color: rgba(255,255,255,0.6);
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+
+    .progress-bar {
+      max-width: 620px;
+      margin: 30px auto 0;
+      padding: 0 20px;
+    }
+
+    .progress-track {
+      background: rgba(255,255,255,0.15);
+      border-radius: 4px;
+      height: 3px;
+      position: relative;
+    }
+
+    .progress-fill {
+      background: var(--accent);
+      height: 100%;
+      border-radius: 4px;
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .form-wrap {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 40px 20px 0;
+    }
+
     .section {
-      background: #fff;
-      padding: 20px;
-      margin: 20px auto;
-      border-radius: 12px;
-      max-width: 600px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(74,158,222,0.12);
+      box-shadow: 0 2px 20px rgba(26,42,58,0.06);
+      animation: fadeUp 0.5s ease both;
     }
-    label {
-      display: block;
-      margin: 10px 0 5px;
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .section:nth-child(1) { animation-delay: 0.1s; }
+    .section:nth-child(2) { animation-delay: 0.2s; }
+    .section:nth-child(3) { animation-delay: 0.3s; }
+    .section:nth-child(4) { animation-delay: 0.4s; }
+    .section:nth-child(5) { animation-delay: 0.5s; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--ice);
+    }
+
+    .section-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--slope), var(--accent));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 1px;
+      color: var(--mountain);
+    }
+
+    .question {
+      margin-bottom: 24px;
+    }
+
+    .question:last-child { margin-bottom: 0; }
+
+    .question-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .question-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px; height: 22px;
+      background: var(--slope);
+      color: white;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 500;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 16px;
+      border-radius: 10px;
+      border: 1.5px solid var(--ice);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      background: white;
+    }
+
+    .option:hover {
+      border-color: var(--accent);
+      background: var(--accent2);
+    }
+
+    .option input[type="radio"],
+    .option input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px; height: 18px;
+      border: 2px solid #c5d5e8;
+      border-radius: 50%;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: all 0.18s;
+      position: relative;
+    }
+
+    .option input[type="checkbox"] {
+      border-radius: 5px;
+    }
+
+    .option input[type="radio"]:checked,
+    .option input[type="checkbox"]:checked {
+      background: var(--slope);
+      border-color: var(--slope);
+    }
+
+    .option input[type="radio"]:checked::after {
+      content: '';
+      position: absolute;
+      width: 6px; height: 6px;
+      background: white;
+      border-radius: 50%;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .option input[type="checkbox"]:checked::after {
+      content: '✓';
+      position: absolute;
+      color: white;
+      font-size: 11px;
+      font-weight: bold;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .option span {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .option:has(input:checked) {
+      border-color: var(--slope);
+      background: var(--accent2);
+    }
+
+    .option:has(input:checked) span {
+      color: var(--slope);
       font-weight: 500;
     }
-    input[type="radio"], input[type="checkbox"] {
-      margin-right: 10px;
+
+    .submit-wrap {
+      text-align: center;
+      padding-top: 10px;
+      animation: fadeUp 0.5s ease 0.6s both;
     }
-    textarea {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      resize: vertical;
-    }
-    button {
-      display: block;
-      margin: 20px auto;
-      padding: 12px 25px;
-      background-color: #4CAF50;
+
+    button[type="submit"] {
+      background: linear-gradient(135deg, var(--mountain), var(--slope));
       color: white;
       border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-    #thankYouMessage {
-      display: none;
-      text-align: center;
-      color: #4CAF50;
+      padding: 16px 48px;
+      border-radius: 50px;
+      font-family: 'Bebas Neue', sans-serif;
       font-size: 20px;
-      font-weight: bold;
-      margin-top: 50px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 20px rgba(26,42,58,0.25);
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(26,42,58,0.35);
+      background: linear-gradient(135deg, var(--slope), var(--accent));
+    }
+
+    .note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 16px;
     }
   </style>
 </head>
 <body>
 
-<h1>Encuesta sobre hábitos de compra</h1>
+<header>
+  <div class="header-tag">Investigación de mercado</div>
+  <h1>Esquís Modulares</h1>
+  <p class="subtitle">Ayúdanos a entender tus hábitos y opiniones sobre el material de esquí</p>
+  <div class="progress-bar">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+</header>
 
+<div class="form-wrap">
 <form action="https://formspree.io/f/mdawpaon" method="POST">
 
-<div class="section">
-  <h2>Sobre ti</h2>
+  <!-- SECCIÓN 1: Perfil -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🧍</div>
+      <div class="section-title">Tu perfil</div>
+    </div>
 
-  <label>1. Edad:</label>
-  <input type="radio" name="edad" value="menos_18"> Menos de 18<br>
-  <input type="radio" name="edad" value="18_24"> 18–24<br>
-  <input type="radio" name="edad" value="25_34"> 25–34<br>
-  <input type="radio" name="edad" value="35_44"> 35–50<br>
-  <input type="radio" name="edad" value="45_54"> 50–65<br>
-  <input type="radio" name="edad" value="55_mas"> 65+<br>
+    <div class="question">
+      <div class="question-label"><span class="question-num">1</span>¿Cuál es tu edad?</div>
+      <div class="options-grid">
+        <label class="option"><input type="radio" name="edad" value="menos_18"><span>Menos de 18 años</span></label>
+        <label class="option"><input type="radio" name="edad" value="18_24"><span>18 – 24 años</span></label>
+        <label class="option"><input type="radio" name="edad" value="25_34"><span>25 – 34 años</span></label>
+        <label class="option"><input type="radio" name="edad" value="35_50"><span>35 – 50 años</span></label>
+        <label class="option"><input type="radio" name="edad" value="50_65"><span>50 – 65 años</span></label>
+        <label class="option"><input type="radio" name="edad" value="65_mas"><span>Más de 65 años</span></label>
+      </div>
+    </div>
 
-  <label>2. Situación:</label>
-  <input type="radio" name="situacion" value="estudiante"> Estudiante<br>
-  <input type="radio" name="situacion" value="trabajador"> Trabajador/a<br>
-  <input type="radio" name="situacion" value="autonomo"> Autónomo/a<br>
-  <input type="radio" name="situacion" value="desempleado"> Desempleado/a<br>
+    <div class="question">
+      <div class="question-label"><span class="question-num">2</span>¿Cuál es tu género?</div>
+      <div class="options-grid">
+        <label class="option"><input type="radio" name="genero" value="hombre"><span>Hombre</span></label>
+        <label class="option"><input type="radio" name="genero" value="mujer"><span>Mujer</span></label>
+        <label class="option"><input type="radio" name="genero" value="otro"><span>Prefiero no decirlo</span></label>
+      </div>
+    </div>
 
-  <label>3. ¿Con quién vives?</label>
-  <input type="radio" name="hogar" value="solo"> Solo/a<br>
-  <input type="radio" name="hogar" value="pareja"> Con pareja<br>
-  <input type="radio" name="hogar" value="familia"> Con familia<br>
-  <input type="radio" name="hogar" value="compartido"> Compartiendo piso<br>
+    <div class="question">
+      <div class="question-label"><span class="question-num">3</span>¿Con qué frecuencia esquías?</div>
+      <div class="options-grid">
+        <label class="option"><input type="radio" name="frecuencia" value="raramente"><span>Raramente (1 vez al año o menos)</span></label>
+        <label class="option"><input type="radio" name="frecuencia" value="ocasional"><span>Ocasionalmente (2–4 veces al año)</span></label>
+        <label class="option"><input type="radio" name="frecuencia" value="regular"><span>Regularmente (más de 5 veces al año)</span></label>
+        <label class="option"><input type="radio" name="frecuencia" value="muy_frecuente"><span>Muy frecuentemente (cada semana en temporada)</span></label>
+      </div>
+    </div>
 
-  <label>4. ¿Quién hace la compra?</label>
-  <input type="radio" name="compra" value="yo"> Yo<br>
-  <input type="radio" name="compra" value="otro"> Otra persona<br>
-  <input type="radio" name="compra" value="compartido"> Compartido<br>
-</div>
+    <div class="question">
+      <div class="question-label"><span class="question-num">4</span>¿Cuál es tu nivel de esquí?</div>
+      <div class="options-grid">
+        <label class="option"><input type="radio" name="nivel" value="principiante"><span>Principiante</span></label>
+        <label class="option"><input type="radio" name="nivel" value="intermedio"><span>Intermedio</span></label>
+        <label class="option"><input type="radio" name="nivel" value="avanzado"><span>Avanzado</span></label>
+        <label class="option"><input type="radio" name="nivel" value="experto"><span>Experto / Competición</span></label>
+      </div>
+    </div>
 
-<div class="section">
-  <h2>Precios</h2>
+    <div class="question">
+      <div class="question-label"><span class="question-num">5</span>¿Qué tipo de esquí practicas habitualmente?</div>
+      <div class="options-grid">
+        <label class="option"><input type="checkbox" name="tipo_esqui" value="pista"><span>Esquí de pista</span></label>
+        <label class="option"><input type="checkbox" name="tipo_esqui" value="fuera_pista"><span>Fuera de pista / freeride</span></label>
+        <label class="option"><input type="checkbox" name="tipo_esqui" value="alpino"><span>Esquí alpino / competición</span></label>
+        <label class="option"><input type="checkbox" name="tipo_esqui" value="travesia"><span>Esquí de travesía</span></label>
+        <label class="option"><input type="checkbox" name="tipo_esqui" value="freestyle"><span>Freestyle / parque de nieve</span></label>
+      </div>
+    </div>
+  </div>
 
-  <label>5. ¿Cómo percibes los precios en los últimos 6 meses?</label>
-  <input type="radio" name="precios" value="subido_mucho"> Han subido mucho<br>
-  <input type="radio" name="precios" value="subido_poco"> Han subido un poco<br>
-  <input type="radio" name="precios" value="igual"> Igual<br>
-  <input type="radio" name="precios" value="bajado"> Han bajado<br>
-  <input type="radio" name="precios" value="no_sabe"> No lo sé<br>
-</div>
+  <!-- SECCIÓN 2: Material actual -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🎿</div>
+      <div class="section-title">Tu material actual</div>
+    </div>
 
-<div class="section">
-  <h2>Comportamiento</h2>
+    <div class="question">
+      <div class="question-label"><span class="question-num">6</span>¿Tienes esquís propios?</div>
+      <div class="options-grid">
+        <label class="option"><input type="radio" name="tiene_esquis" value="si"><span>Sí, tengo mis propios esquís</span></label>
+        <label class="option"><input type="radio" name="tiene_esquis" value="alquilo"><span>No, siempre alquilo</span></label>
+        <label class="option"><input type="radio" name="tiene_esquis" value="ambos"><span>Tengo propios pero a veces alquilo</span></label>
+      </div>
+    </div>
 
-  <label>6. ¿Has cambiado tus hábitos?</label>
-  <input type="radio" name="habitos" value="si"> Sí<br>
-  <input type="radio" name="habitos" value="no"> No<br>
+    <div class="question">
+      <div class="question-label"><span class="question-num">7</span>¿Cuánto gastaste en tus últimos esquís?</div>
+      <div class="options-grid">
+        <label class="option"><input type="radio" name="precio_esquis" value="menos_300"><span>Menos de 300 €</span></label>
+        <label class="option"><input type="radio" name="precio_esquis" value="300_600"><span>300 € – 600 €</span></label>
+        <label class="option"><input type="radio" name="precio_esquis" value="600_1000"><span>600 € – 1.000 €</span></label>
+        <label class="option"><input type="radio" name="precio_esquis" value="mas_1000"><span>Más de 1.000 €</span></label>
+        <label class="option"><input type="radio" name="precio_esquis" value="siempre_alquilo"><span>Siempre alquilo, no tengo esquís propios</span></label>
+        <label class="option"><input type="radio" name="precio_esquis" value="no_aplica"><span>No aplica / no recuerdo</span></label>
+      </div>
+    </div>
 
-  <label>7. ¿Qué cambios has hecho?</label>
-  <input type="checkbox" name="cambios" value="marca_blanca"> Marca blanca<br>
-  <input type="checkbox" name="cambios" value="menos_cantidad"> Comprar menos<br>
-  <input type="checkbox" name="cambios" value="eliminar_productos"> Dejar productos<br>
-  <input type="checkbox" name="cambios" value="ofertas"> Buscar ofertas<br>
-  <input type="checkbox" name="cambios" value="cambiar_super"> Cambiar supermercado<br>
-  <input type="checkbox" name="cambios" value="ninguno"> Ninguno<br>
-</div>
+    <div class="question">
+      <div class="question-label"><span class="question-num">8</span>¿Cuáles son tus mayores frustraciones con el material actual?</div>
+      <div class="options-grid">
+        <label class="option"><input type="checkbox" name="frustraciones" value="precio"><span>El precio es muy alto</span></label>
+        <label class="option"><input type="checkbox" name="frustraciones" value="transporte"><span>Difícil de transportar</span></label>
+        <label class="option"><input type="checkbox" name="frustraciones" value="almacenamiento"><span>Ocupa mucho espacio en casa</span></label>
+        <label class="option"><input type="checkbox" name="frustraciones" value="versatilidad"><span>No es versátil para distintas condiciones</span></label>
+        <label class="option"><input type="checkbox" name="frustraciones" value="mantenimiento"><span>Mantenimiento costoso</span></label>
+        <label class="option"><input type="checkbox" name="frustraciones" value="ninguna"><span>Ninguna, estoy satisfecho/a</span></label>
+      </div>
+    </div>
+  </div>
 
-<div class="section">
-  <h2>Comparación</h2>
+  <!-- SECCIÓN 3: Esquís modulares -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🔧</div>
+      <div class="section-title">Esquís modulares</div>
+    </div>
 
-  <label>8. ¿Comparas precios?</label>
-  <input type="radio" name="comparar" value="frecuente"> Frecuentemente<br>
-  <input type="radio" name="comparar" value="a_veces"> A veces<br>
-  <input type="radio" name="comparar" value="rara_vez"> Rara vez<br>
-  <input type="radio" name="comparar" value="nunca"> Nunca<br>
+    <div class="question">
+      <div class="question-label"><span class="question-num">9</span>¿Conocías el concepto de esquí modular (piezas intercambiables según terreno o uso)?</div>
+      <div class="options-grid">
+        <label class="option"><input type="radio" name="conoce_modular" value="si"><span>Sí, lo conozco bien</span></label>
+        <label class="option"><input type="radio" name="conoce_modular" value="algo"><span>Lo he oído pero no sé mucho</span></label>
+        <label class="option"><input type="radio" name="conoce_modular" value="no"><span>No, es la primera vez que lo escucho</span></label>
+      </div>
+    </div>
 
-  <label>9. ¿Cómo comparas?</label>
-  <input type="radio" name="metodo" value="supermercados"> Ir a supermercados<br>
-  <input type="radio" name="metodo" value="folletos"> Folletos/ofertas<br>
-  <input type="radio" name="metodo" value="apps"> Apps/webs<br>
-  <input type="radio" name="metodo" value="experiencia"> Experiencia<br>
-  <input type="radio" name="metodo" value="no_compara"> No comparo<br>
-</div>
+    <div class="question">
+      <div class="question-label"><span class="question-num">10</span>¿Qué característica de un esquí modular te parece más atractiva?</div>
+      <div class="options-grid">
+        <label class="option"><input type="radio" name="atractivo" value="versatilidad"><span>Adaptarse a distintos terrenos y condiciones</span></label>
+        <label class="option"><input type="radio" name="atractivo" value="precio"><span>Ahorro económico a largo plazo</span></label>
+        <label class="option"><input type="radio" name="atractivo" value="transporte"><span>Más fácil de transportar y almacenar</span></label>
+        <label class="option"><input type="radio" name="atractivo" value="personalizacion"><span>Personalización según mi estilo</span></label>
+        <label class="option"><input type="radio" name="atractivo" value="ninguno"><span>No me resulta atractivo</span></label>
+      </div>
+    </div>
 
-<div class="section">
-  <h2>Solución</h2>
+    <div class="question">
+      <div class="question-label"><span class="question-num">11</span>¿Cuánto estarías dispuesto/a a pagar por un esquí modular de calidad?</div>
+      <div class="options-grid">
+        <label class="option"><input type="radio" name="precio_modular" value="menos_400"><span>Menos de 400 €</span></label>
+        <label class="option"><input type="radio" name="precio_modular" value="400_700"><span>400 € – 700 €</span></label>
+        <label class="option"><input type="radio" name="precio_modular" value="700_1200"><span>700 € – 1.200 €</span></label>
+        <label class="option"><input type="radio" name="precio_modular" value="mas_1200"><span>Más de 1.200 € si la calidad lo justifica</span></label>
+        <label class="option"><input type="radio" name="precio_modular" value="no_compraria"><span>No lo compraría</span></label>
+      </div>
+    </div>
+  </div>
 
-  <label>10. ¿Te gustaría una app de comparación?</label>
-  <input type="radio" name="interes_app" value="si"> Sí<br>
-  <input type="radio" name="interes_app" value="no"> No<br>
-  <input type="radio" name="interes_app" value="depende"> Depende<br>
-
-  <label>11. ¿Pagarías por ella?</label>
-  <input type="radio" name="pago" value="suscripcion"> Suscripción<br>
-  <input type="radio" name="pago" value="pago_unico"> Pago único<br>
-  <input type="radio" name="pago" value="solo_si_ahorro"> Solo si ahorro mucho<br>
-  <input type="radio" name="pago" value="no"> No<br>
-
-</div>
-
-<button type="submit">Enviar</button>
+  <div class="submit-wrap">
+    <button type="submit">Enviar encuesta</button>
+    <p class="note">Tus respuestas son anónimas y se usarán solo con fines de investigación.</p>
+  </div>
 
 </form>
+</div>
+
+<script>
+  const inputs = document.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+  const fill = document.getElementById('progressFill');
+  const sections = document.querySelectorAll('.section');
+  const total = sections.length;
+
+  function updateProgress() {
+    let answered = 0;
+    sections.forEach(sec => {
+      const names = new Set([...sec.querySelectorAll('input')].map(i => i.name));
+      names.forEach(name => {
+        if (document.querySelector(`input[name="${name}"]:checked`)) answered++;
+      });
+    });
+    const allNames = new Set([...document.querySelectorAll('input')].map(i => i.name));
+    fill.style.width = Math.round((answered / allNames.size) * 100) + '%';
+  }
+
+  inputs.forEach(i => i.addEventListener('change', updateProgress));
+</script>
+
 </body>
 </html>
